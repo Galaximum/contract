@@ -45,6 +45,7 @@ let package = Package(
                 orderTargetName,
                 parameterTargetName,
                 profileTargetName,
+                coreTargetName,
             ]
         )
     ],
