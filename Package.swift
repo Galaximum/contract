@@ -28,11 +28,11 @@ let package = Package(
                 apigatewayTargetName,
                 authTargetName,
                 blacklistTargetName,
-                coreTargetName,
                 favoritesTargetName,
                 lotTargetName,
                 parameterTargetName,
                 profileTargetName,
+                coreTargetName,
             ]
         )
     ],
