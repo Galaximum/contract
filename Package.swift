@@ -45,23 +45,22 @@ let package = Package(
                 orderTargetName,
                 parameterTargetName,
                 profileTargetName,
-                coreTargetName,
             ]
         )
     ],
     dependencies: packageDependencies,
     targets: [
-        .target(name: addressTargetName, dependencies: [.product(name:"GRPC", package: "grpc-swift")]),
-        .target(name: apigatewayTargetName, dependencies: [.product(name:"GRPC", package: "grpc-swift")]),
-        .target(name: authTargetName, dependencies: [.product(name:"GRPC", package: "grpc-swift")]),
-        .target(name: blacklistTargetName, dependencies: [.product(name:"GRPC", package: "grpc-swift")]),
-        .target(name: chatTargetName, dependencies: [.product(name:"GRPC", package: "grpc-swift")]),
+        .target(name: addressTargetName, dependencies: [.core, .product(name:"GRPC", package: "grpc-swift")]),
+        .target(name: apigatewayTargetName, dependencies: [.core, .product(name:"GRPC", package: "grpc-swift")]),
+        .target(name: authTargetName, dependencies: [.core, .product(name:"GRPC", package: "grpc-swift")]),
+        .target(name: blacklistTargetName, dependencies: [.core, .product(name:"GRPC", package: "grpc-swift")]),
+        .target(name: chatTargetName, dependencies: [.core, .product(name:"GRPC", package: "grpc-swift")]),
         .target(name: coreTargetName, dependencies: [.product(name:"GRPC", package: "grpc-swift")]),
         .target(name: favoritesTargetName, dependencies: [.core, .product(name:"GRPC", package: "grpc-swift")]),
         .target(name: lotTargetName, dependencies: [.core, .product(name:"GRPC", package: "grpc-swift")]),
-        .target(name: objectstorageTargetName, dependencies: [.product(name:"GRPC", package: "grpc-swift")]),
-        .target(name: orderTargetName, dependencies: [.product(name:"GRPC", package: "grpc-swift")]),
-        .target(name: parameterTargetName, dependencies: [.product(name:"GRPC", package: "grpc-swift")]),
+        .target(name: objectstorageTargetName, dependencies: [.core, .product(name:"GRPC", package: "grpc-swift")]),
+        .target(name: orderTargetName, dependencies: [.core, .product(name:"GRPC", package: "grpc-swift")]),
+        .target(name: parameterTargetName, dependencies: [.core, .product(name:"GRPC", package: "grpc-swift")]),
         .target(name: profileTargetName, dependencies: [.core, .product(name:"GRPC", package: "grpc-swift")]),
     ]
 )
