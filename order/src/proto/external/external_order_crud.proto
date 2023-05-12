@@ -3,8 +3,8 @@ syntax = "proto3";
 package ru.zveron.contract.order.external;
 
 import "model/order_model.proto";
-import "google/type/date.proto";
-import "google/type/timeofday.proto";
+import "model/date.proto";
+import "model/timeofday.proto";
 
 option swift_prefix = "";
 option java_package = "ru.zveron.contract.order.external";
@@ -96,10 +96,4 @@ message SimilarOrder {
 enum ServiceDeliveryMethod {
   IN_PERSON = 0;
   REMOTE = 1;
-}
-
-message Address {
-  string town = 1;
-  string station = 2;
-  string color = 3;
 }
