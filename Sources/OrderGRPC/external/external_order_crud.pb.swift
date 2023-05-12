@@ -244,6 +244,7 @@ public struct SimilarOrder {
   fileprivate var _address: Address? = nil
 }
 
+
 #if swift(>=5.5) && canImport(_Concurrency)
 extension ServiceDeliveryMethod: @unchecked Sendable {}
 extension GetOrderRequest: @unchecked Sendable {}
@@ -251,6 +252,7 @@ extension GetOrderResponse: @unchecked Sendable {}
 extension FullOrder: @unchecked Sendable {}
 extension Profile: @unchecked Sendable {}
 extension SimilarOrder: @unchecked Sendable {}
+
 #endif  // swift(>=5.5) && canImport(_Concurrency)
 
 // MARK: - Code below here is support for the SwiftProtobuf runtime.

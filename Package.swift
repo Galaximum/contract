@@ -65,6 +65,6 @@ let package = Package(
         .target(name: orderTargetName, dependencies: [.core, .product(name:"GRPC", package: "grpc-swift")]),
         .target(name: parameterTargetName, dependencies: [.core, .product(name:"GRPC", package: "grpc-swift")]),
         .target(name: profileTargetName, dependencies: [.core, .product(name:"GRPC", package: "grpc-swift")]),
-        .target(name: specialistTargetName, dependencies: [.core, .product(name:"GRPC", package: "grpc-swift")]),
+        .target(name: specialistTargetName, dependencies: [.core, .product(name:"GRPC", package: "grpc-swift")])
     ]
 )
