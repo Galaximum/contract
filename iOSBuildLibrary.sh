@@ -1,7 +1,7 @@
 #!/bin/bash
 
 function getFiles() {
-find . -name "*.proto" ! -name "*internal*.proto" -not -path "*/build/*" -not -path "*/internal/*" -print0 >tmpfile
+find . -name "*.proto" ! -name "*internal*.proto" -not -path "*/.build/*" -not -path "*/build/*" -not -path "*/internal/*" -print0 >tmpfile
 while IFS=  read -r -d $'\0'; do
     protoFiles+=("$REPLY")
 done <tmpfile
@@ -11,7 +11,7 @@ rm -f tmpfile
 function findDirectory() {
 temp=$(realpath $1)
 
- while [ "$(basename $(dirname $temp))" != "contract" ]; do
+ while [ "$(basename $(dirname $temp))" != "contract1" ]; do
       temp=$(dirname $temp)
  done
 
@@ -48,7 +48,7 @@ function createDirectoryAndFile() {
   mkdir -p "$logicPathToNewProto"
   currentDir="$PWD"
   cd "$(dirname $proto)"
-  command1="protoc -I=. -I=$currentDir/core/src/proto -I=$currentDir/parameter/src/proto -I=$currentDir/order/src/proto --swift_opt=Visibility=Public --swift_out=$logicPathToNewProto $(basename $proto)"
+  command1="protoc -I=. -I=$currentDir/core/src/proto -I=$currentDir/parameter/src/proto -I=$currentDir/order/src/proto -I=$currentDir/chat/src/proto --swift_opt=Visibility=Public --swift_out=$logicPathToNewProto $(basename $proto)"
   command2="protoc $(basename $proto) --grpc-swift_opt=Visibility=Public,Client=true,Server=false --grpc-swift_out=$logicPathToNewProto"
   $command1
 
@@ -72,7 +72,7 @@ function generateSwiftFiles() {
 function generateTargetNameAndValue() {
     temp=$(realpath $1)
 
-     while [ "$(basename $(dirname $temp))" != "contract" ]; do
+     while [ "$(basename $(dirname $temp))" != "contract1" ]; do
           temp=$(dirname $temp)
      done
 
@@ -124,6 +124,10 @@ function generatePackageSwift() {
   echo "    .package(url: \"https://github.com/grpc/grpc-swift.git\", from: \"1.13.2\")" >> $filename
   echo "]" >> $filename
   echo "" >> $filename
+  echo "extension Target.Dependency {" >> $filename
+  echo "    static let core: Self = .target(name: coreTargetName)" >> $filename
+  echo "}" >> $filename
+  echo "" >> $filename
   echo "let package = Package(" >> $filename
   echo "    name: packageName," >> $filename
   echo "    products: [" >> $filename
@@ -140,7 +144,7 @@ function generatePackageSwift() {
   echo "    dependencies: packageDependencies," >> $filename
   echo "    targets: [" >> $filename
   for i in "${targetNames[@]}"; do
-        echo "        .target(name: $i, dependencies: [.product(name:\"GRPC\", package: \"grpc-swift\")])," >> $filename
+        echo "        .target(name: $i, dependencies: [.core, .product(name:\"GRPC\", package: \"grpc-swift\")])," >> $filename
     done
   echo "    ]" >> $filename
   echo ")" >> $filename
@@ -153,7 +157,7 @@ function generatePackageSwift() {
 #$loadSwiftProtobuf;$loadGRPCSwift;$loadCoreUtils
 
 #2. delete all previous files
-rm -R "Sources"
+# rm -R "Sources"
 
 #3. generate unnecessary swift-files
 generateSwiftFiles
